@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+if [ "$(id -u)" -ne 0 ]; then
+    echo 'Run with sudo.' >&2
+    exit 1
+fi
+case ${1:-} in
+    on) printf '1\n' > /etc/sunlogin-fusionfix-clipboard ;;
+    off) printf '0\n' > /etc/sunlogin-fusionfix-clipboard ;;
+    *) echo 'Usage: sudo sunlogin-fusionfix-clipboard on|off' >&2; exit 2 ;;
+esac
+echo 'Restart the AweSun GUI to apply the change.'
